@@ -101,14 +101,26 @@ const Footer = () => `
                 <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
                     <li><a href="#" class="hover:text-brand-gold">Track Order</a></li>
                     <li><a href="#" class="hover:text-brand-gold">Returns</a></li>
-                    <li><a href="#" class="hover:text-brand-gold">FAQ</a></li>
+                    <li><a href="#/faq" class="hover:text-brand-gold">FAQ</a></li>
                 </ul>
             </div>
             <div>
                 <h3 class="font-semibold mb-4 text-lg">Newsletter</h3>
-                <div class="flex">
-                    <input type="email" placeholder="Email Address" class="px-3 py-2 w-full border dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-l outline-none focus:border-brand-gold text-sm">
+                <div class="flex mb-6">
+                    <input type="email" placeholder="Email Address" class="px-3 py-2 w-full border dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-l outline-none focus:border-brand-gold text-sm" aria-label="Email for newsletter">
                     <button class="bg-brand-gold text-white px-4 py-2 rounded-r text-sm font-medium hover:bg-yellow-600 transition-colors">Subscribe</button>
+                </div>
+                <h3 class="font-semibold mb-4 text-lg">Follow Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-xl hover:bg-brand-gold hover:text-white transition-colors" aria-label="Instagram">
+                        <i class="ph-fill ph-instagram-logo"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-xl hover:bg-brand-gold hover:text-white transition-colors" aria-label="Facebook">
+                        <i class="ph-fill ph-facebook-logo"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-xl hover:bg-brand-gold hover:text-white transition-colors" aria-label="Twitter">
+                        <i class="ph-fill ph-twitter-logo"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -167,6 +179,28 @@ const HomeView = () => {
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                         ${featured.map(ProductCard).join('')}
                     </div>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="py-20 px-4 md:px-8 max-w-7xl mx-auto">
+                <h2 class="font-display text-3xl font-bold text-center mb-12">What Our Customers Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    ${getTestimonials().map(t => `
+                        <div class="bg-white dark:bg-brand-darkcard p-8 rounded-xl relative overflow-hidden border dark:border-gray-800 transition-colors duration-300 hover:shadow-lg">
+                            <i class="ph-fill ph-quotes text-5xl text-gray-100 dark:text-gray-800 absolute top-4 right-4 opacity-50 pointer-events-none"></i>
+                            <div class="flex items-center gap-4 mb-6 relative z-10">
+                                <img src="${t.avatar}" alt="${t.name}" class="w-16 h-16 rounded-full object-cover border-2 border-brand-gold">
+                                <div>
+                                    <h4 class="font-bold font-display text-lg">${t.name}</h4>
+                                    <div class="flex text-brand-gold text-sm">
+                                        ${Array(t.rating).fill('<i class="ph-fill ph-star"></i>').join('')}
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 italic relative z-10">"${t.review}"</p>
+                        </div>
+                    `).join('')}
                 </div>
             </section>
         </div>
@@ -443,6 +477,29 @@ const CheckoutView = () => {
     `;
 };
 
+const FaqView = () => {
+    const faqs = getFaqs();
+    return `
+        <div class="view-enter view-enter-active pt-12 pb-24 max-w-4xl mx-auto px-4 md:px-8">
+            <div class="text-center mb-12">
+                <h1 class="font-display text-4xl font-bold mb-4">Frequently Asked Questions</h1>
+                <p class="text-gray-500">Everything you need to know about shopping with Urban Vogue.</p>
+            </div>
+            <div class="space-y-6">
+                ${faqs.map(faq => `
+                    <div class="bg-gray-50 dark:bg-brand-darkcard p-6 rounded-lg border dark:border-gray-800 transition-colors duration-300">
+                        <h3 class="font-bold text-xl mb-3 flex items-start gap-3">
+                            <i class="ph ph-question text-brand-gold text-2xl mt-0.5"></i>
+                            ${faq.question}
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 pl-9 leading-relaxed">${faq.answer}</p>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+};
+
 
 // Actions
 window.toggleCardDetails = (show) => {
@@ -512,6 +569,7 @@ const router = () => {
     else if (hash === '#/lookbook') content = LookbookView();
     else if (hash === '#/cart') content = CartView();
     else if (hash === '#/checkout') content = CheckoutView();
+    else if (hash === '#/faq') content = FaqView();
     else content = '<div class="text-center py-20 text-2xl font-bold">404 - Page Not Found</div>';
 
     return content;
