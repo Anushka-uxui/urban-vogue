@@ -112,7 +112,7 @@ const Footer = () => `
                 </div>
                 <h3 class="font-semibold mb-4 text-lg">Follow Us</h3>
                 <div class="flex space-x-4">
-                    <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-xl hover:bg-brand-gold hover:text-white transition-colors" aria-label="Instagram">
+                    <a href="https://www.instagram.com/urbanvogue047" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-xl hover:bg-brand-gold hover:text-white transition-colors" aria-label="Instagram">
                         <i class="ph-fill ph-instagram-logo"></i>
                     </a>
                     <a href="#" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-xl hover:bg-brand-gold hover:text-white transition-colors" aria-label="Facebook">
@@ -161,14 +161,17 @@ const HomeView = () => {
             <section class="py-20 px-4 md:px-8 max-w-7xl mx-auto">
                 <h2 class="font-display text-3xl font-bold text-center mb-12">Shop by Category</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    ${['Women', 'Men', 'Streetwear'].map((cat, i) => `
+                    ${['Women', 'Men', 'Streetwear'].map((cat) => {
+                        const catProduct = getProducts().find(p => p.category === cat) || getProducts()[0];
+                        return `
                         <a href="#/collections?cat=${cat}" class="relative h-96 group overflow-hidden rounded-lg">
-                            <img src="${mockProducts[i].imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="${cat}">
+                            <img src="${catProduct.imageUrl}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="${cat}">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
                                 <h3 class="text-white text-2xl font-bold">${cat}</h3>
                             </div>
                         </a>
-                    `).join('')}
+                        `;
+                    }).join('')}
                 </div>
             </section>
 
