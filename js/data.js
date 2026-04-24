@@ -249,13 +249,13 @@ const mockProducts = [
     // Ethnic Collection
     {
         id: 25,
-        name: "Elegant Evening Kurta",
+        name: "Elegant Evening Kurta Set",
         price: 4999,
         category: "Ethnic",
         rating: 4.9,
         reviews: 320,
         isNew: true,
-        imageUrl: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=600&q=80"
+        imageUrl: "images/elegant_kurta.png"
     },
     {
         id: 26,
@@ -265,17 +265,17 @@ const mockProducts = [
         rating: 5.0,
         reviews: 512,
         isNew: false,
-        imageUrl: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=600&q=80"
+        imageUrl: "images/silk_saree.png"
     },
     {
         id: 27,
-        name: "Festive Draped Saree",
+        name: "Festive Short Kurti",
         price: 3299,
         category: "Ethnic",
         rating: 4.6,
         reviews: 84,
         isNew: true,
-        imageUrl: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80"
+        imageUrl: "images/short_kurti.png"
     },
     {
         id: 28,
